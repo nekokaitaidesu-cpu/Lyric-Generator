@@ -6,8 +6,9 @@ import GWingApp from './src/generators/g-wing/GeneratorApp';
 import NekketsuRoboApp from './src/generators/nekketsu-robo/GeneratorApp';
 import YasukeApp from './src/generators/yasuke/GeneratorApp';
 import MarunouchiApp from './src/generators/marunouchi/GeneratorApp';
+import EigoKyokashoApp from './src/generators/eigo-kyokasho/GeneratorApp';
 
-type GeneratorId = 'g-wing' | 'nekketsu-robo' | 'yasuke' | 'marunouchi' | null;
+type GeneratorId = 'g-wing' | 'nekketsu-robo' | 'yasuke' | 'marunouchi' | 'eigo-kyokasho' | null;
 
 export default function App() {
   const [activeGenerator, setActiveGenerator] = useState<GeneratorId>(null);
@@ -37,6 +38,9 @@ export default function App() {
       )}
       {activeGenerator === 'marunouchi' && (
         <MarunouchiApp onBackToHub={handleBackToHub} />
+      )}
+      {activeGenerator === 'eigo-kyokasho' && (
+        <EigoKyokashoApp onBackToHub={handleBackToHub} />
       )}
     </SafeAreaView>
   );

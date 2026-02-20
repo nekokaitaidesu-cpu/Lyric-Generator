@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-type GeneratorId = 'g-wing' | 'nekketsu-robo' | 'yasuke' | 'marunouchi';
+type GeneratorId = 'g-wing' | 'nekketsu-robo' | 'yasuke' | 'marunouchi' | 'eigo-kyokasho';
 
 interface Props {
   onSelect: (id: GeneratorId) => void;
@@ -53,6 +53,16 @@ const GENERATORS = [
     bg: 'rgba(0,255,65,0.08)',
     border: 'rgba(0,229,255,0.3)',
     tag: 'TOKYO CITY POP SYS',
+  },
+  {
+    id: 'eigo-kyokasho' as GeneratorId,
+    title: '英語教科書',
+    subtitle: 'LYRIC GENERATOR',
+    desc: '小中学校で習う英単語＆英文で歌う\n"I have a pen." を歌詞に変換せよ',
+    accent: '#5bc8f5',
+    bg: 'rgba(91,200,245,0.08)',
+    border: 'rgba(91,200,245,0.3)',
+    tag: 'SCHOOL ENGLISH PROTOCOL',
   },
 ];
 
