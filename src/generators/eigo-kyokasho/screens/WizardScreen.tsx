@@ -57,7 +57,7 @@ export default function WizardScreen({ sections: initialSections, onComplete, on
   };
 
   // COPYモード用: 既に入力済みの全行を収集
-  const filledLines = sections.flatMap((s, si) =>
+  const copyableLines = sections.flatMap((s, si) =>
     s.lines
       .map((line, li) => ({ si, li, text: line, label: s.label }))
       .filter(({ text, si: fsi, li: fli }) =>
@@ -197,10 +197,10 @@ export default function WizardScreen({ sections: initialSections, onComplete, on
         {copyMode ? (
           <View style={styles.copyBox}>
             <Text style={styles.candidatesLabel}>// COPY FROM PREVIOUS LINES //</Text>
-            {filledLines.length === 0 ? (
+            {copyableLines.length === 0 ? (
               <Text style={styles.copyEmptyText}>コピー可能な行がありません</Text>
             ) : (
-              filledLines.map((item, i) => (
+              copyableLines.map((item, i) => (
                 <TouchableOpacity
                   key={i}
                   style={styles.copyItem}
