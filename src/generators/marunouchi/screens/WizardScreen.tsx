@@ -23,6 +23,7 @@ export default function WizardScreen({ sections: initialSections, onComplete, on
   );
   const [inputMode, setInputMode] = useState<InputMode>('candidates');
   const [customText, setCustomText] = useState('');
+  const [copyMode, setCopyMode] = useState(false);
   // frontier: furthest line the user has reached (can jump back to any line up to here)
   const [frontier, setFrontier] = useState<{ s: number; l: number }>({ s: 0, l: 0 });
 
@@ -53,8 +54,18 @@ export default function WizardScreen({ sections: initialSections, onComplete, on
     setSections(updated);
     setCustomText('');
     setInputMode('candidates');
+    setCopyMode(false);
     advanceCursor(updated);
   };
+
+  // COPYモード用: 既に入力済みの全行を収集
+  const filledLines = sections.flatMap((s, si) =>
+    s.lines
+      .map((line, li) => ({ si, li, text: line, label: s.label }))
+      .filter(({ text, si: fsi, li: fli }) =>
+        text && text !== '（スキップ）' && !(fsi === sectionIdx && fli === lineIdx)
+      )
+  );
 
   const advanceCursor = (updatedSections: Section[]) => {
     const section = updatedSections[sectionIdx];
@@ -111,6 +122,7 @@ export default function WizardScreen({ sections: initialSections, onComplete, on
     setLineIdx(li);
     setInputMode('candidates');
     setCustomText('');
+    setCopyMode(false);
     refreshCandidates(si, li, sections);
   };
 
@@ -194,7 +206,29 @@ export default function WizardScreen({ sections: initialSections, onComplete, on
         </View>
 
         {/* Input area */}
-        {inputMode === 'candidates' ? (
+        {copyMode ? (
+          <View style={styles.copyBox}>
+            <Text style={styles.candidatesLabel}>// COPY FROM PREVIOUS LINES //</Text>
+            {filledLines.length === 0 ? (
+              <Text style={styles.copyEmptyText}>コピー可能な行がありません</Text>
+            ) : (
+              filledLines.map((item, i) => (
+                <TouchableOpacity
+                  key={i}
+                  style={styles.copyItem}
+                  onPress={() => commitLine(item.text)}
+                  activeOpacity={0.8}
+                >
+                  <Text style={styles.copyItemLabel}>[{item.label}]</Text>
+                  <Text style={styles.copyItemText} numberOfLines={1}>{item.text}</Text>
+                </TouchableOpacity>
+              ))
+            )}
+            <TouchableOpacity style={styles.copyCancelBtn} onPress={() => setCopyMode(false)}>
+              <Text style={styles.copyCancelText}>✕  CANCEL</Text>
+            </TouchableOpacity>
+          </View>
+        ) : inputMode === 'candidates' ? (
           <View style={styles.candidatesBox}>
             <Text style={styles.candidatesLabel}>// CANDIDATES — タップして選択 //</Text>
             {candidates.map((c, i) => (
@@ -247,10 +281,17 @@ export default function WizardScreen({ sections: initialSections, onComplete, on
             style={styles.actionBtn}
             onPress={() => {
               setInputMode(inputMode === 'custom' ? 'candidates' : 'custom');
+              setCopyMode(false);
               setCustomText('');
             }}
           >
             <Text style={styles.actionBtnText}>✏{'\n'}INPUT</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.actionBtn}
+            onPress={() => { setCopyMode(!copyMode); setInputMode('candidates'); setCustomText(''); }}
+          >
+            <Text style={styles.actionBtnText}>⧉{'\n'}COPY</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionBtn} onPress={handleSkip}>
             <Text style={styles.actionBtnText}>▷{'\n'}SKIP</Text>
@@ -413,6 +454,57 @@ const styles = StyleSheet.create({
   },
   disabledBtn: { backgroundColor: COLORS.cardBg2, borderWidth: 1, borderColor: COLORS.border },
   disabledText: { color: COLORS.textDim },
+  copyBox: {
+    backgroundColor: COLORS.cardBg,
+    borderWidth: 1,
+    borderColor: COLORS.neonPink,
+    borderRadius: 2,
+    padding: 12,
+    marginBottom: 12,
+    maxHeight: 220,
+  },
+  copyEmptyText: {
+    fontFamily: 'monospace',
+    fontSize: 11,
+    color: COLORS.textDim,
+    textAlign: 'center',
+    paddingVertical: 12,
+  },
+  copyItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: COLORS.neonPink + '66',
+    backgroundColor: COLORS.neonPink + '11',
+    borderRadius: 2,
+    padding: 8,
+    marginBottom: 4,
+    gap: 8,
+  },
+  copyItemLabel: {
+    fontFamily: 'monospace',
+    fontSize: 9,
+    color: COLORS.neonPink,
+    letterSpacing: 1,
+    width: 72,
+  },
+  copyItemText: {
+    flex: 1,
+    fontSize: 12,
+    color: COLORS.textPrimary,
+    letterSpacing: 0.3,
+  },
+  copyCancelBtn: {
+    alignItems: 'center',
+    paddingVertical: 8,
+    marginTop: 4,
+  },
+  copyCancelText: {
+    fontFamily: 'monospace',
+    fontSize: 11,
+    color: COLORS.neonPink,
+    letterSpacing: 2,
+  },
   actionRow: {
     flexDirection: 'row',
     gap: 8,

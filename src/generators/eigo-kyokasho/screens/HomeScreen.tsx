@@ -62,7 +62,7 @@ export default function HomeScreen({ onStart, onBackToHub }: Props) {
           {"I have a pen. I have an apple.\n"}
           {"There is a dog under the table.\n"}
           {"My father is a doctor.\n"}
-          {"三単現のSが　喉に引っかかってる"}
+          {"I am a student. I am a student."}
         </Text>
       </View>
 

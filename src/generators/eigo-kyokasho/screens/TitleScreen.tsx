@@ -32,7 +32,7 @@ export default function TitleScreen({ title, onUpdate, onNext, onBack }: Props) 
   const [customA, setCustomA] = useState(initWords[0]);
   const [customB, setCustomB] = useState(initWords[1]);
 
-  const combinedTitle = `${wordA}${wordB}`;
+  const combinedTitle = `${wordA} ${wordB}`;
 
   const rerollA = () => {
     const newA = TITLE_STARTERS[Math.floor(Math.random() * TITLE_STARTERS.length)];
