@@ -28,7 +28,7 @@ export interface LyricState {
 
 export const STYLE_PROMPTS: Record<StyleOption, string> = {
   yururi:
-    'Lo-fi, Dream Pop, Acoustic Guitar, Soft Female Vocals, 80bpm, Chill, Warm, Nostalgic, School Days vibes',
+    'Acid Jazz, Neo Soul, Chill, Downtempo, Groovy Bass, Jazzy Piano, Laid-back, Mid-tempo, 95bpm, Female Vocals, R&B',
   norinori:
-    'J-Pop, Synth Pop, Dance, Up-tempo, 128bpm, Energetic, Catchy, Bright, Cheerful, School Days vibes',
+    'J-Pop, Jazz Rock, Piano Rock, Swing, Syncopated, Female Vocals, Groovy Bass, Fast Paced, 90s Japanese City Pop vibe, 100bpm, Expressive Ad-lib',
 };

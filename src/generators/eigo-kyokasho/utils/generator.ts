@@ -73,15 +73,16 @@ export function generateTitle(): string {
   return `${s}${e}`;
 }
 
-// ---------- lyrics-only text (no section labels, no meta tags) ----------
+// ---------- export text helpers ----------
 
-export function generateLyricsOnlyText(sections: Section[]): string {
+/** 歌詞コピー用: [Section] ラベル付き、メタタグなし */
+export function generateLyricsText(sections: Section[]): string {
   return sections
-    .map((s) =>
-      s.lines
-        .filter((l) => l && l !== '（スキップ）')
-        .join('\n')
-    )
-    .filter((block) => block.length > 0)
+    .map((s) => {
+      const lines = s.lines.filter((l) => l && l !== '（スキップ）');
+      if (lines.length === 0) return null;
+      return `[${s.label}]\n${lines.join('\n')}`;
+    })
+    .filter(Boolean)
     .join('\n\n');
 }
