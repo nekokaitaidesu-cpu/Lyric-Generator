@@ -63,9 +63,9 @@ export default function StructureScreen({ onSelect, onSelectZero, onBack }: Prop
         <View style={styles.infoBox}>
           <Text style={styles.infoLabel}>/// STRUCTURE GUIDE ///</Text>
           <Text style={styles.infoText}>
-            {'α — Verse始まりのスタンダード構成\n'}
-            {'β — Chorus中心の盛り上がり重視構成\n'}
-            {'ZERO — 自由にブロックを並べる'}
+            {'A — Verse始まりのスタンダード構成\n'}
+            {'B — Chorus中心の盛り上がり重視構成\n'}
+            {'C — 自由にブロックを並べる'}
           </Text>
         </View>
       </ScrollView>

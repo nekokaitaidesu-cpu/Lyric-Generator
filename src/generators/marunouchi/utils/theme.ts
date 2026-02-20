@@ -73,9 +73,11 @@ export const TYPOGRAPHY = StyleSheet.create({
 });
 
 export const SECTION_COLORS: Record<string, string> = {
+  intro: COLORS.neonYellow,
   verse: COLORS.neonGreen,
   verse2: COLORS.neonCyan,
   'pre-chorus': COLORS.neonCyan,
   chorus: COLORS.neonPink,
+  bridge: COLORS.neonPurple,
   outro: COLORS.textSecondary,
 };
