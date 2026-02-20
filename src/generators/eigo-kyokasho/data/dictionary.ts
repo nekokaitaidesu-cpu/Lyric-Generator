@@ -5,16 +5,15 @@
 // TITLE WORDS（2単語タイトル生成用）
 // ────────────────────────────────────────────────────────────────────────────
 export const TITLE_STARTERS: string[] = [
-  '放課後の', '蛍光ペンの', '消えかけた', '給食の', '教室の',
-  '三単現の', '英単語の', 'チョークの', '転校生の', 'リスニングの',
-  '赤ペンの', '補習の', '夏休みの', '単語帳の', '忘れかけた',
+  'My', 'This Is', 'I Have', 'Do You', 'Yes,', 'Hello,',
+  'Goodbye,', 'I Like', 'Can You', 'I Want', 'Nice To',
+  'Thank You', 'Excuse Me,', 'Open Your', 'Repeat After',
 ];
 
 export const TITLE_ENDERS: string[] = [
-  'ライティング', 'ヒアリング', 'スペリング', 'グラマー',
-  'リーディング', 'ボキャブラリー', 'ダイアログ', 'ディクテーション',
-  'アルファベット', 'リスニング', 'ワークシート', 'テキストブック',
-  'ホームワーク', 'ノートブック', 'ペンシル',
+  'A Pen', 'A Dream', 'A Dog', 'My Friend', 'English',
+  'A Book', 'The Sky', 'Your Name', 'A Student', 'The Morning',
+  'A Bicycle', 'The Teacher', 'Baseball', 'Me', 'Tomorrow',
 ];
 
 // ────────────────────────────────────────────────────────────────────────────

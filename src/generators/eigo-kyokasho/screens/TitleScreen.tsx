@@ -153,8 +153,8 @@ export default function TitleScreen({ title, onUpdate, onNext, onBack }: Props) 
         <View style={styles.infoBox}>
           <Text style={styles.infoLabel}>// TITLE FORMULA //</Text>
           <Text style={styles.infoText}>
-            {'[WORD A]  形容詞・状況・修飾語\n'}
-            {'[WORD B]  英語学習用語・カタカナ語\n'}
+            {'[WORD A]  教科書フレーズの冒頭\n'}
+            {'[WORD B]  教科書フレーズの結末\n'}
             {'→ 両方をタップして直接編集も可能'}
           </Text>
         </View>
